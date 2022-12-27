@@ -4,28 +4,32 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>login From</title>
+		<title>게시물 등록</title>
 	</head>
+	
 	<body>
+		<h1>게시글 등록</h1>
+		
 		<div>
 			<a href="${pageContext.request.contextPath}/BoardListController">홈으로</a>
 		</div>
-		<form action="${pageContext.request.contextPath}/LoginActionController" method="post">
+		
+		<form action="${pageContext.request.contextPath}/AddBoardActionController" method="post">
 			<table border="1">
 				<tr>
-					<td>아이디</td>
+					<th>제목</th>
 					<td>
-						<input type="text" name="memberId">
+						<input type="text" name="title" style="width:90%;">
 					</td>
 				</tr>
 				<tr>
-					<td>비밀번호</td>
+					<th>내용</th>
 					<td>
-						<input type="password" name="memberPw">
+						<textarea rows="10" cols="100" name="content"></textarea>
 					</td>
 				</tr>
 			</table>
-			<button type="submit">로그인</button>
+			<button type="submit">등록</button>
 		</form>
 	</body>
 </html>

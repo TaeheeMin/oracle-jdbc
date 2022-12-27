@@ -10,21 +10,19 @@ import javax.servlet.http.HttpSession;
 
 import vo.Member;
 
-@WebServlet("/LoginFormController")
-public class LoginFormController extends HttpServlet {
-	
+@WebServlet("/addBoardFormController")
+public class addBoardFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-	   Member loginMember = (Member)session.getAttribute("loginMember");
-	   if(loginMember != null) { // 이미 로그인 상태
-    	  System.out.println("로그인 중");
-    	  response.sendRedirect(request.getContextPath()+"/BoardListController");
-    	  return;
-	   }
-      
-	   // 폼 View
-	   request.getRequestDispatcher("/WEB-INF/view/loginForm.jsp").forward(request, response);
-	
+		// 로그인X -> 로그인폼 이동
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			System.out.println("로그인 필요");
+			response.sendRedirect(request.getContextPath()+"/LoginFormController");
+			return;
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/view/addBoardForm.jsp").forward(request, response);
 	}
 
 }

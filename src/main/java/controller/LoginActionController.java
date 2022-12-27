@@ -21,7 +21,7 @@ public class LoginActionController extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember != null) {
 			System.out.println("로그인중");
-			response.sendRedirect(request.getContextPath()+"/BoardListConteroller");
+			response.sendRedirect(request.getContextPath()+"/BoardListController");
 			return;
 		}
 		
@@ -56,6 +56,6 @@ public class LoginActionController extends HttpServlet {
 	    // 로그인 성공시 session에 정보 저장 -> home이동
 	    System.out.println("로그인 성공 " + returnMember.getMemberId() + " <- Login Action Id");
 	    session.setAttribute("loginMember", returnMember);
-	    response.sendRedirect(request.getContextPath()+"/BoardListConteroller");
+	    response.sendRedirect(request.getContextPath()+"/BoardListController");
 	}
 }

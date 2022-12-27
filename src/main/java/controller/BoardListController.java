@@ -13,8 +13,8 @@ import service.BoardService;
 import vo.Board;
 
 
-@WebServlet("/BoardListConteroller")
-public class BoardListConteroller extends HttpServlet {
+@WebServlet("/BoardListController")
+public class BoardListController extends HttpServlet {
 	private BoardService boardService;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

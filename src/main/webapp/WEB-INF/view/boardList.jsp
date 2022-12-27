@@ -17,7 +17,18 @@
 	<body>
 		<h1>BOARD LIST</h1>
 		
-		<form id="pageForm" method="get" action="${pageContext.request.contextPath}/BoardListConteroller">
+		<c:if test="${loginMember != null}">
+			<div>${loginMember.memberName}님 안녕하세요</div>
+			<a href="${pageContext.request.contextPath}/LogoutController">로그아웃</a>
+		</c:if>
+		
+		<c:if test="${loginMember == null}">
+			<a href="${pageContext.request.contextPath}/LoginFormController">로그인</a>
+		</c:if>
+		<div>
+			<a href="${pageContext.request.contextPath}/addBoardFormController">글등록</a>
+		</div>
+		<form id="pageForm" method="get" action="${pageContext.request.contextPath}/BoardListController">
 			<select name="rowPerPage" id="rowPerPage">
 				<c:if test="${rowPerPage == 10}">
 					<option value="10" selected="selected">10</option>
@@ -40,9 +51,10 @@
 		<table border="1">
 			<thead>
 				<tr>
-					<th>board No</th>
-					<th>board Title</th>
-					<th>create Date</th>
+					<th>게시글 번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -50,18 +62,19 @@
 					<tr>
 						<td>${b.boardNo}</td>
 						<td>
-							<a href="${pageContext.request.contextPath}">
+							<a href="${pageContext.request.contextPath}/BoardListOneController?boardNo=${b.boardNo}">
 								${b.boardTitle}
 							</a>
 						</td>
+						<td>${b.memberId}</td>
 						<td>${b.createdate}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		<div>
-			<a href="${pageContext.request.contextPath}/BoardListConteroller?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
-			<a href="${pageContext.request.contextPath}/BoardListConteroller?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+			<a href="${pageContext.request.contextPath}/BoardListController?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
+			<a href="${pageContext.request.contextPath}/BoardListController?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
 		</div>
 	</body>
 </html>

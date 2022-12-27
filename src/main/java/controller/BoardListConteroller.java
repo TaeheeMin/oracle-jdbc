@@ -24,14 +24,14 @@ public class BoardListConteroller extends HttpServlet {
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		System.out.println(currentPage);
+		// System.out.println(currentPage);
 		
 		// 2) rowPerPage
 		int rowPerPage = 10;
 		if(request.getParameter("rowPerPage") != null) {
 			rowPerPage = Integer.parseInt(request.getParameter("rowPerPage"));
 		}
-		System.out.println(rowPerPage);
+		// System.out.println(rowPerPage);
 		
 		this.boardService = new BoardService();
 		ArrayList<Board> list = boardService.getBoardListByPage(currentPage, rowPerPage);
@@ -42,5 +42,4 @@ public class BoardListConteroller extends HttpServlet {
 		
 		request.getRequestDispatcher("WEB-INF/view/boardList.jsp").forward(request, response);
 	}
-
 }

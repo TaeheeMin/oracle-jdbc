@@ -59,7 +59,17 @@
 				%>
 			</tbody>
 		</table>
-		<a href="<%=request.getContextPath()%>/memberList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-		<a href="<%=request.getContextPath()%>/memberList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+		<%
+			if(currentPage <= 1){
+		%>
+				<a href="<%=request.getContextPath()%>/memberList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+		<%
+			} else {
+		%>
+				<a href="<%=request.getContextPath()%>/memberList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+				<a href="<%=request.getContextPath()%>/memberList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+		<%
+			}
+		%>
 	</body>
 </html>

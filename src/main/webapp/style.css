@@ -1,0 +1,104 @@
+@charset "UTF-8";
+.head{
+    /*line-height:85px;
+    height: 85px;*/
+    top: 0px;
+    text-align: center;
+    z-index: 999;
+    /*z-index : 우선순위*/
+    transition: all 0.2s;
+    position: relative;
+}
+.head .logo{
+    margin-top: 33px;
+    padding-bottom: 33px;
+}
+.right_f .in {
+	position: absolute;
+	right: 30px;
+	top: 0px;
+	bottom: 0px;
+	z-index: 210;
+	display: inline-table;
+}
+.content {
+	height: 100%;
+	box-sizing : border-box;
+	min-height: 600px;
+	padding: 85px 0px 0px;
+}
+.board-list {
+	max-width: 965px;
+	margin: auto;
+}
+
+.board-listheader{
+	text-align:center;
+}
+
+.board-list.table td{
+	padding:11px 10px 10px;
+	border-top:1px solid #eaeaea;
+	color:#353535;
+	vertical-align:middle;
+}
+.board-list.teble thead th{
+	padding:20px 0;
+	border-bottom:1px solid #eaeaea;
+	color:#353535;
+	vertical-align:middle;
+	font-weight:normal;
+	font-size:14px;
+	text-align:center;
+}
+.board-list.teble tbody td{
+	padding:11px 0 10px 18px;
+	border:1px solid #dfdfdf;
+	border-bottom-width:0;
+	color:#353535;
+	text-align:left;
+	font-weight:normal;
+	background-color:#fff;
+}
+.teble.typeList table{
+	border-top:1px solid #eaeaea;
+}
+.teble.typeList td {
+	padding:15px 3px 15px;
+	height:32px;
+	font-size:13px;
+}
+.teble.typeList td a{
+	color:#000;
+}
+.teble.typeList .head td{
+	padding:11px 0 10px;
+	border-left:1px solid #dfdfdf;
+	border-bottom:1px solid #dfdfdf;
+	color:#353535;
+	vertical-align:middle;
+	text-align:center;
+	background:#fbfafa;
+}
+
+
+
+.text_margin_r{
+    margin-right : 250px;
+}
+.text_position{
+	position: absolute;
+    right: 480px;
+	top: 90px;
+    /*font-family: 'minion_regular',serif !important;*/
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 15px;
+}
+    
+/*스크롤 바로 올리는 anker css*/
+.top_anker_wrap {position: fixed; z-index: 8000; right: 35px; bottom: 18%; display: none; width: 40px; height:40px; box-shadow: 0 0 15px #bbb; background-color: white; border-radius: 200px;  cursor: pointer; transition: all 0.3s;}
+.top_anker_wrap .top_anker_icon{ width: 18px; position: absolute; left:50%; top: 50%; margin-left: -9px; margin-top: -6px; transition: all 0.3s;}
+.top_anker_wrap:hover .top_anker_icon{ margin-top: -10px; }
+.top_anker_wrap .top_anker_icon2{ width: 30px; position: absolute; left:50%; top: 50%; margin-left: -15px; margin-top: -15px;}
+/*.menu_none{ display: none; }*/

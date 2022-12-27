@@ -20,8 +20,10 @@ public class BoardService {
 			conn = DBUtil.getConnection();
 			int beginRow = (currentPage - 1) * rowPerPage + 1;
 			int endRow = beginRow + rowPerPage - 1;
+			// System.out.println("beginRow : " + beginRow);
+			// System.out.println("endRow : " + endRow);
 			boardDao = new BoardDao();
-			list = boardDao.selectBoardListByPage(conn, currentPage, endRow);
+			list = boardDao.selectBoardListByPage(conn, beginRow, endRow);
 			conn.commit(); // DBUtil setAutoCommit false설정
 		} catch (Exception e) {
 			try {
@@ -95,6 +97,7 @@ public class BoardService {
 		}
 		return result;
 	}
+	
 	// 3) modify
 	public int modifyBoard(Board board) {
 		int result = 0;

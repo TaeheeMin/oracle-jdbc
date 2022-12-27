@@ -24,14 +24,14 @@ public class BoardListController extends HttpServlet {
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		// System.out.println(currentPage);
+		// System.out.println("currentPage : " + currentPage);
 		
 		// 2) rowPerPage
 		int rowPerPage = 10;
 		if(request.getParameter("rowPerPage") != null) {
 			rowPerPage = Integer.parseInt(request.getParameter("rowPerPage"));
 		}
-		// System.out.println(rowPerPage);
+		// System.out.println("rowPerPage : " + rowPerPage);
 		
 		this.boardService = new BoardService();
 		ArrayList<Board> list = boardService.getBoardListByPage(currentPage, rowPerPage);

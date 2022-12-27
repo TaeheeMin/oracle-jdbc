@@ -10,8 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import vo.Member;
 
-@WebServlet("/LoginFormController")
-public class LoginFormController extends HttpServlet {
+/**
+ * Servlet implementation class SigninFormController
+ */
+@WebServlet("/SigninFormController")
+public class SigninFormController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -23,6 +26,8 @@ public class LoginFormController extends HttpServlet {
 		}
       
 		// 폼 View
-		request.getRequestDispatcher("/WEB-INF/view/loginForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/signinForm.jsp").forward(request, response);
+
 	}
+
 }

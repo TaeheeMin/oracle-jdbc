@@ -47,7 +47,10 @@
 				</c:if>
 			</select>
 		</form>
-		
+		<form method="get" action="">
+			<input name="word" type="text" placeholder="검색">
+			<button type="button">검색</button>
+		</form>
 		<table border="1">
 			<thead>
 				<tr>

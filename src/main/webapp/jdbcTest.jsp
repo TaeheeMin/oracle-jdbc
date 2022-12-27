@@ -9,7 +9,9 @@
 	
 	<body>
 		<%
-			
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","gdj58","java1234");
+			System.out.println("연결 성공");
 			
 		%>
 	</body>

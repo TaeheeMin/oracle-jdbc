@@ -44,7 +44,6 @@ public class BoardService {
 	}
 	public ArrayList<Board> getBoardListBySearch(int currentPage, int rowPerPage, String word) {
 		// Connection 생성(DBUtil), beginRow, endRow 생성(currentPage, rowPerPage 가공)
-		
 		ArrayList<Board> list = new ArrayList<Board>();
 		Connection conn = null;
 		try {

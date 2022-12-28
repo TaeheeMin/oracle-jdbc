@@ -53,6 +53,7 @@ public class BoardDao {
 		}
 		return list;
 	}
+	
 	// 1-2) 게시물 한 개
 	public Board selectboardOne(Connection conn, int boardNo) throws Exception {
 		Board board = new Board();

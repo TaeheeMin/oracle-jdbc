@@ -19,9 +19,9 @@ public class BoardListController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String word = request.getParameter("word");
-		System.out.println(word);
+		// System.out.println(word);
 		
-		// 1) currentPage
+		// 1) currentPage		
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -32,7 +32,7 @@ public class BoardListController extends HttpServlet {
 		int rowPerPage = 10;
 		if(request.getParameter("rowPerPage") != null) {
 			rowPerPage = Integer.parseInt(request.getParameter("rowPerPage"));
-			System.out.println(request.getParameter("rowPerPage"));
+			// System.out.println(request.getParameter("rowPerPage"));
 		}
 		// System.out.println("rowPerPage : " + rowPerPage);
 		
@@ -49,7 +49,6 @@ public class BoardListController extends HttpServlet {
 		request.setAttribute("boardList", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("rowPerPage", rowPerPage);
-		
 		request.getRequestDispatcher("WEB-INF/view/board/boardList.jsp").forward(request, response);
 	}
 }

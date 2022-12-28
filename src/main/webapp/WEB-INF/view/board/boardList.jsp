@@ -86,9 +86,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="center">
-					<a href="${pageContext.request.contextPath}/AddBoard">글등록</a> 
-				</div>
+			</div>
+			<div class="right">
+				<a href="${pageContext.request.contextPath}/AddBoard">글등록</a> 
 			</div>
 			
 			<form id="searchForm" method="get" action="${pageContext.request.contextPath}/BoardList">

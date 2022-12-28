@@ -15,16 +15,8 @@
 }
 .center {
 	vertical-align:middle;
-	 text-align: center;
+	text-align: center;
 	position: absolute;
-	font-size: smaller;
-}
-.right {
-	position: absolute;
-	right: 30px;
-	bottom: opx;
-	z-index: 210;
-	display: inline-table;
 	font-size: smaller;
 }
 
@@ -41,6 +33,13 @@
 	box-sizing : border-box;
 	min-height: 600px;
 	margin-top: 30px
+}
+.content .right {
+	position: absolute;
+	right: 30px;
+	bottom: opx;
+	z-index: 210;
+	display: inline-table;
 }
 .board-list {
 	max-width: 1000px;

@@ -12,7 +12,7 @@ import service.BoardService;
 import vo.Member;
 
 
-@WebServlet("/board/RemoveBoard")
+@WebServlet("/RemoveBoard")
 public class RemoveBoardController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,7 +22,7 @@ public class RemoveBoardController extends HttpServlet {
 		
 		// 유효성 검사 
 		if(request.getParameter("boardNo") == null) {
-			response.sendRedirect(request.getContextPath() + "/BoardListController");
+			response.sendRedirect(request.getContextPath() + "/BoardList");
 			System.out.println("RemoveBoardAction 유효성X");
 			return;
 		}
@@ -37,11 +37,11 @@ public class RemoveBoardController extends HttpServlet {
 		if(result == 1) {
 			// one으로 이동
 			System.out.println("삭제성공");
-			response.sendRedirect(request.getContextPath()+"/BoardListController"); 
+			response.sendRedirect(request.getContextPath()+"/BoardList"); 
 		} else {
 			// 폼이동
 			System.out.println("삭제실패");
-			response.sendRedirect(request.getContextPath()+"/BoardListOneController?boardNo="+boardNo);
+			response.sendRedirect(request.getContextPath()+"/BoardOne?boardNo="+boardNo);
 		}
 	}
 }

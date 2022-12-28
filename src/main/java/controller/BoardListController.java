@@ -13,7 +13,7 @@ import service.BoardService;
 import vo.Board;
 
 
-@WebServlet("/board/BoardList")
+@WebServlet("/BoardList")
 public class BoardListController extends HttpServlet {
 	private BoardService boardService;
 	

@@ -11,10 +11,10 @@
 		<h1>게시글 등록</h1>
 		
 		<div>
-			<a href="${pageContext.request.contextPath}/BoardListController">홈으로</a>
+			<a href="${pageContext.request.contextPath}/BoardList">홈으로</a>
 		</div>
 		
-		<form action="${pageContext.request.contextPath}/AddBoardActionController" method="post">
+		<form action="${pageContext.request.contextPath}/AddBoard" method="post">
 			<table border="1">
 				<tr>
 					<th>제목</th>

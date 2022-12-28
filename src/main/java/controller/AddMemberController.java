@@ -12,7 +12,7 @@ import service.MemberService;
 import vo.Member;
 
 
-@WebServlet("/AddMemberController")
+@WebServlet("/AddMember")
 public class AddMemberController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,12 +20,12 @@ public class AddMemberController extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember != null) { // 이미 로그인 상태
 			System.out.println("로그인 중");
-			response.sendRedirect(request.getContextPath()+"/BoardListController");
+			response.sendRedirect(request.getContextPath()+"/BoardList");
 			return;
 		}
       
 		// 폼 View
-		request.getRequestDispatcher("/WEB-INF/view/signinForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/member/addMember.jsp").forward(request, response);
 	}
 
 	
@@ -41,7 +41,7 @@ public class AddMemberController extends HttpServlet {
 			|| request.getParameter("memberPw1").equals("")
 			|| request.getParameter("memberPw2") == null
 			|| request.getParameter("memberPw2").equals("")) {
-			response.sendRedirect(request.getContextPath() + "/SigninFormController");
+			response.sendRedirect(request.getContextPath() + "/AddMember");
 			System.out.println("SigninActionController 유효성X");
 			return;
 		}
@@ -65,7 +65,7 @@ public class AddMemberController extends HttpServlet {
 		if(result == 1) {
 			// 리스트로 이동
 			System.out.println("중복있음");
-			response.sendRedirect(request.getContextPath()+"/SigninFormController");
+			response.sendRedirect(request.getContextPath()+"/AddMember");
 			return;
 		}
 		
@@ -74,11 +74,11 @@ public class AddMemberController extends HttpServlet {
 		if(result == 1) {
 			// 리스트로 이동
 			System.out.println("가입성공");
-			response.sendRedirect(request.getContextPath()+"/BoardListController"); 
+			response.sendRedirect(request.getContextPath()+"/BoardList"); 
 		} else {
 			// 폼이동
 			System.out.println("가입실패");
-			response.sendRedirect(request.getContextPath()+"/SigninFormController");
+			response.sendRedirect(request.getContextPath()+"/AddMember");
 		}
 	}
 }

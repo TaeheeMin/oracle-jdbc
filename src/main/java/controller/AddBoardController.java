@@ -12,7 +12,7 @@ import service.BoardService;
 import vo.Board;
 import vo.Member;
 
-@WebServlet("/board/AddBoard")
+@WebServlet("/AddBoard")
 public class AddBoardController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,10 +21,10 @@ public class AddBoardController extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember == null) {
 			System.out.println("로그인 필요");
-			response.sendRedirect(request.getContextPath()+"/LoginFormController");
+			response.sendRedirect(request.getContextPath()+"/Login");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/addBoardForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/board/addBoardForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +38,7 @@ public class AddBoardController extends HttpServlet {
 				|| request.getParameter("title").equals("")
 				|| request.getParameter("content") == null
 				|| request.getParameter("content").equals("")) {
-			response.sendRedirect(request.getContextPath() + "/AddBoardFormController");
+			response.sendRedirect(request.getContextPath() + "/AddBoard");
 			System.out.println("AddBoardAction 유효성X");
 			return;
 		}
@@ -58,11 +58,11 @@ public class AddBoardController extends HttpServlet {
 		if(result == 1) {
 			// 리스트로 이동
 			System.out.println("입력성공");
-			response.sendRedirect(request.getContextPath()+"/BoardListController"); 
+			response.sendRedirect(request.getContextPath()+"/BoardList"); 
 		} else {
 			// 폼이동
 			System.out.println("입력실패");
-			response.sendRedirect(request.getContextPath()+"/AddBoardFormController");
+			response.sendRedirect(request.getContextPath()+"/AddBoard");
 		}
 	}
 

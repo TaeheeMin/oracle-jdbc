@@ -13,7 +13,7 @@
 			
 		%>
 		<div>
-			<a href="${pageContext.request.contextPath}/BoardListController">홈으로</a>
+			<a href="${pageContext.request.contextPath}/BoardList">홈으로</a>
 		</div>
 		<table border="1">
 			<tr>
@@ -30,8 +30,8 @@
 			</tr>
 		</table>
 		<div>
-			<a href='${pageContext.request.contextPath}/ModifyBoardFormController?boardNo=${board.boardNo}'>수정</a>
-			<a href='${pageContext.request.contextPath}/RemoveBoardActionController?boardNo=${board.boardNo}'>삭제</a>
+			<a href='${pageContext.request.contextPath}/ModifyBoard?boardNo=${board.boardNo}'>수정</a>
+			<a href='${pageContext.request.contextPath}/RemoveBoard?boardNo=${board.boardNo}'>삭제</a>
 		</div>
 	</body>
 </html>

@@ -6,8 +6,8 @@
 		<meta charset="UTF-8">
 		<title>BOARD LIST</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/style.css" rel="stylesheet">
   		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+		<link href="${pageContext.request.contextPath}/style.css" rel="stylesheet">
 		<script>
 			$(document).ready(function() {
 				$('#rowPerPage').change(finction() {
@@ -25,13 +25,13 @@
 					<div>
 						<c:if test="${loginMember != null}">
 							${loginMember.memberName}님
-							<a href="${pageContext.request.contextPath}/">MYPAGE</a>
-							<a href="${pageContext.request.contextPath}/member/logout">LOGOUT</a>
+							<a href="${pageContext.request.contextPath}/ModifyMember">MYPAGE</a>
+							<a href="${pageContext.request.contextPath}/Logout">LOGOUT</a>
 						</c:if>
 						
 						<c:if test="${loginMember == null}">
-							<a href="${pageContext.request.contextPath}/LoginFormController">LOGIN</a>
-							<a href="${pageContext.request.contextPath}/SigninFormController">SIGNIN</a>
+							<a href="${pageContext.request.contextPath}/LoginController">LOGIN</a>
+							<a href="${pageContext.request.contextPath}/AddMember">SIGNIN</a>
 						</c:if>
 					</div>
 				</div>
@@ -39,7 +39,7 @@
 		</div>
 		<div class="content">
 			<div>
-				<a href="${pageContext.request.contextPath}/addBoardFormController">글등록</a>
+				<a href="${pageContext.request.contextPath}/AddBoard">글등록</a>
 			</div>
 			
 			<div class="board-list">
@@ -57,7 +57,7 @@
 							<tr>
 								<td>${b.boardNo}</td>
 								<td>
-									<a href="${pageContext.request.contextPath}/board/BoardList?boardNo=${b.boardNo}">
+									<a href="${pageContext.request.contextPath}/BoardOne?boardNo=${b.boardNo}">
 										${b.boardTitle}
 									</a>
 								</td>
@@ -68,7 +68,7 @@
 					</tbody>
 				</table> 
 			</div>
-			<form id="pageForm" method="get" action="${pageContext.request.contextPath}/board/BoardList">
+			<form id="pageForm" method="get" action="${pageContext.request.contextPath}/BoardList">
 				<select name="rowPerPage" id="rowPerPage">
 					<c:if test="${rowPerPage == 10}">
 						<option value="10" selected="selected">10</option>
@@ -92,8 +92,8 @@
 				<button type="button">검색</button>
 			</form>
 			<div>
-				<a href="${pageContext.request.contextPath}/board/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
-				<a href="${pageContext.request.contextPath}/board/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+				<a href="${pageContext.request.contextPath}/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
+				<a href="${pageContext.request.contextPath}/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
 			</div>
 		</div>
 		

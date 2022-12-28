@@ -14,7 +14,7 @@ import service.BoardService;
 import vo.Board;
 
 
-@WebServlet("/board/BoardOne")
+@WebServlet("/BoardOne")
 public class BoardOneController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,7 +22,7 @@ public class BoardOneController extends HttpServlet {
 		
 		// 유효성 검사 
 		if(request.getParameter("boardNo") == null) {
-			response.sendRedirect(request.getContextPath() + "/BoardListController");
+			response.sendRedirect(request.getContextPath() + "/BoardList");
 			System.out.println("BoardOne 유효성 검사X");
 			return;
 		}
@@ -36,7 +36,7 @@ public class BoardOneController extends HttpServlet {
 		// view와 공유할 모델 데이터 성정
 		request.setAttribute("board", board);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardOne.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/board/boardOne.jsp");
 		rd.forward(request, response);
 	}
 

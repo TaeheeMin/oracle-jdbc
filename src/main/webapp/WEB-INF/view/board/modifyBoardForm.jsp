@@ -13,10 +13,10 @@
 			
 		%>
 		<div>
-			<a href="${pageContext.request.contextPath}/BoardListController">홈으로</a>
+			<a href="${pageContext.request.contextPath}/BoardList">홈으로</a>
 		</div>
 		
-		<form action="${pageContext.request.contextPath}/ModifyBoardActionController?boardNo=${board.boardNo}" method="post">
+		<form action="${pageContext.request.contextPath}/ModifyBoard?boardNo=${board.boardNo}" method="post">
 			<table border="1">
 				<tr>
 					<th>제목</th>

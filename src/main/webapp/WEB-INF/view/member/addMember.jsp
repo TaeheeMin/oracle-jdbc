@@ -8,9 +8,9 @@
 	<body>
 		<h1>회원가입</h1>
 		<div>
-			<a href="${pageContext.request.contextPath}/BoardListController">홈으로</a>
+			<a href="${pageContext.request.contextPath}/BoardList">홈으로</a>
 		</div>
-		<form action="${pageContext.request.contextPath}/SigninActionController" method="post">
+		<form action="${pageContext.request.contextPath}/AddMember" method="post">
 			<table border="1">
 				<tr>
 					<td>아이디</td>

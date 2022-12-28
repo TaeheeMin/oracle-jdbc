@@ -20,12 +20,12 @@ public class LoginController extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember != null) { // 이미 로그인 상태
 			System.out.println("로그인 중");
-			response.sendRedirect(request.getContextPath()+"/BoardListController");
+			response.sendRedirect(request.getContextPath()+"/BoardList");
 			return;
 		}
       
 		// 폼 View
-		request.getRequestDispatcher("/WEB-INF/view/loginForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/member/loginForm.jsp").forward(request, response);
 	}
 
 	
@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember != null) {
 			System.out.println("로그인중");
-			response.sendRedirect(request.getContextPath()+"/BoardListController");
+			response.sendRedirect(request.getContextPath()+"/BoardList");
 			return;
 		}
 		
@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 				|| request.getParameter("memberId").equals("") 
 				|| request.getParameter("memberPw") == null 
 				|| request.getParameter("memberPw").equals("") ) {
-			response.sendRedirect(request.getContextPath()+"/WEB-INF/view/loginForm.jsp");
+			response.sendRedirect(request.getContextPath()+"/LoginController");
 			System.out.println("LoginController 유효성X");
 			return;
 		}
@@ -66,14 +66,14 @@ public class LoginController extends HttpServlet {
 	    // 로그인 실패시 폼으로 이동
 	    if(returnMember == null) {
 	    	System.out.println("로그인 실패");
-	    	response.sendRedirect(request.getContextPath()+"/LoginFormController");
+	    	response.sendRedirect(request.getContextPath()+"/LoginController");
 	    	return;
 	    }
 
 	    // 로그인 성공시 session에 정보 저장 -> home이동
 	    System.out.println("로그인 성공 " + returnMember.getMemberId() + " <- Login Action Id");
 	    session.setAttribute("loginMember", returnMember);
-	    response.sendRedirect(request.getContextPath()+"/BoardListController");
+	    response.sendRedirect(request.getContextPath()+"/BoardList");
 	}
 
 }

@@ -15,7 +15,7 @@ import vo.Board;
 import vo.Member;
 
 
-@WebServlet("/board/ModifyBoard")
+@WebServlet("/ModifyBoard")
 public class ModifyBoardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class ModifyBoardController extends HttpServlet {
 		
 		// 유효성 검사 
 		if(request.getParameter("boardNo") == null) {
-			response.sendRedirect(request.getContextPath() + "/BoardListController");
+			response.sendRedirect(request.getContextPath() + "/BoardList");
 			System.out.println("modifyBoardForm 유효성 검사X");
 			return;
 		}
@@ -38,7 +38,7 @@ public class ModifyBoardController extends HttpServlet {
 		request.setAttribute("board", board);
 		
 		// view 연결
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/modifyBoardForm.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/board/modifyBoardForm.jsp");
 		rd.forward(request, response);
 	}
 	
@@ -51,7 +51,7 @@ public class ModifyBoardController extends HttpServlet {
 		if(request.getParameter("title") == null || request.getParameter("title").equals("")
 			|| request.getParameter("content") == null || request.getParameter("content").equals("")
 			|| request.getParameter("boardNo") == null) {
-			response.sendRedirect(request.getContextPath() + "/BoardListController");
+			response.sendRedirect(request.getContextPath() + "/BoardList");
 			System.out.println("ModifyBoardAction 유효성 검사 실패");
 			return;
 		}
@@ -72,11 +72,11 @@ public class ModifyBoardController extends HttpServlet {
 		if(result == 1) {
 			// 리스트로 이동
 			System.out.println("수정성공");
-			response.sendRedirect(request.getContextPath()+"/BoardListController"); 
+			response.sendRedirect(request.getContextPath()+"/BoardList"); 
 		} else {
 			// 폼이동
 			System.out.println("수정실패");
-			response.sendRedirect(request.getContextPath()+"/ModifyBoardFormController?boardNo="+board.getBoardNo());
+			response.sendRedirect(request.getContextPath()+"/ModifyBoard?boardNo="+board.getBoardNo());
 		}
 	}
 

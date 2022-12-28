@@ -31,7 +31,28 @@ public class BoardDao {
 		}
 		return list;
 	}
-	
+	public ArrayList<Board> selectBoardListBySearch(Connection conn, int beginRow, int endRow, String word) throws Exception {
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "SELECT board_no boardNo, board_title boardTitle, member_id memberId, createdate"
+				+ " FROM (SELECT rownum rnum, board_no, board_title, member_id, createdate"
+				+ "			 FROM (SELECT board_no, board_title, member_id, createdate"
+				+ "					 FROM board ORDER BY board_no DESC))"
+				+ " WHERE board_title LIKE ? AND rnum BETWEEN ? AND ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, "%"+word+"%");
+		stmt.setInt(2, beginRow);
+		stmt.setInt(3, endRow);
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			Board b = new Board();
+			b.setBoardNo(rs.getInt("boardNo"));
+			b.setBoardTitle(rs.getString("boardTitle"));
+			b.setMemberId(rs.getString("memberId"));
+			b.setCreatedate(rs.getString("createdate"));
+			list.add(b);
+		}
+		return list;
+	}
 	// 1-2) 게시물 한 개
 	public Board selectboardOne(Connection conn, int boardNo) throws Exception {
 		Board board = new Board();

@@ -18,7 +18,9 @@ public class BoardListController extends HttpServlet {
 	private BoardService boardService;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 유효성 검사X
+		String word = request.getParameter("word");
+		System.out.println(word);
+		
 		// 1) currentPage
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
@@ -30,11 +32,19 @@ public class BoardListController extends HttpServlet {
 		int rowPerPage = 10;
 		if(request.getParameter("rowPerPage") != null) {
 			rowPerPage = Integer.parseInt(request.getParameter("rowPerPage"));
+			System.out.println(request.getParameter("rowPerPage"));
 		}
 		// System.out.println("rowPerPage : " + rowPerPage);
 		
 		this.boardService = new BoardService();
-		ArrayList<Board> list = boardService.getBoardListByPage(currentPage, rowPerPage);
+		ArrayList<Board> list = new ArrayList<Board>();
+		
+		// 검색어 분기
+		if(request.getParameter("word") == null || request.getParameter("word").equals("")) {
+			list = boardService.getBoardListByPage(currentPage, rowPerPage);
+		} else {
+			list = boardService.getBoardListBySearch(currentPage, rowPerPage, word);
+		}
 		
 		request.setAttribute("boardList", list);
 		request.setAttribute("currentPage", currentPage);

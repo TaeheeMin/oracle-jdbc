@@ -55,5 +55,4 @@ public class RemoveMemberController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/RemoveMember");
 		}
 	}
-
 }

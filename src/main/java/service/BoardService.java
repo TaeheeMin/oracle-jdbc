@@ -42,6 +42,37 @@ public class BoardService {
 		}
 		return list;
 	}
+	public ArrayList<Board> getBoardListBySearch(int currentPage, int rowPerPage, String word) {
+		// Connection 생성(DBUtil), beginRow, endRow 생성(currentPage, rowPerPage 가공)
+		
+		ArrayList<Board> list = new ArrayList<Board>();
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			int beginRow = (currentPage - 1) * rowPerPage + 1;
+			int endRow = beginRow + rowPerPage - 1;
+			// System.out.println("beginRow : " + beginRow);
+			// System.out.println("endRow : " + endRow);
+			boardDao = new BoardDao();
+			list = boardDao.selectBoardListBySearch(conn, beginRow, endRow, word);
+			conn.commit(); // DBUtil setAutoCommit false설정
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 	
 	// 1-2) boardone
 	public Board getBoardOne(int boardNo) {

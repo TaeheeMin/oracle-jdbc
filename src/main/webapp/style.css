@@ -19,7 +19,6 @@
 	position: absolute;
 	font-size: smaller;
 }
-
 .right .in {
 	position: absolute;
 	right: 30px;
@@ -32,7 +31,6 @@
 	height: 100%;
 	box-sizing : border-box;
 	min-height: 600px;
-	margin-top: 30px
 }
 .content .right {
 	position: absolute;
@@ -64,7 +62,6 @@
 	vertical-align:middle;
 	font-weight:normal;
 	font-size:14px;
-
 }
 .board-list.teble tbody td{
 	padding:11px 0 10px 18px;
@@ -75,6 +72,12 @@
 	font-weight:normal;
 	background-color:#fff;
 	text-align:center;
+}
+.paginate {
+	margin: 30px 0;
+	text-align: center;
+	font-size: 0;
+	line-height: 34px;
 }
 .teble.typeList table{
 	border-top:1px solid #eaeaea;
@@ -96,9 +99,6 @@
 	text-align:center;
 	background:#fbfafa;
 }
-
-
-
 .text_margin_r{
     margin-right : 250px;
 }
@@ -111,6 +111,9 @@
     font-weight: bold;
     font-size: 15px;
 }
+.board_nav {margin:0 auto 40px;width:100%;max-width:965px;font-family:'Roboto';font-size:13px;font-weight:400;}
+.board_nav span {display:block;font-size:18px;margin-bottom:15px;}
+.board_nav a {display:inline-block;margin-right:20px;color:#999999;font-size:14px;}
     
 /*스크롤 바로 올리는 anker css*/
 .top_anker_wrap {position: fixed; z-index: 8000; right: 35px; bottom: 18%; display: none; width: 40px; height:40px; box-shadow: 0 0 15px #bbb; background-color: white; border-radius: 200px;  cursor: pointer; transition: all 0.3s;}

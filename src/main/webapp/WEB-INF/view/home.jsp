@@ -4,8 +4,16 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link href="${pageContext.request.contextPath}/style.css" rel="stylesheet">
 		<title>홈</title>
+		<link href="${pageContext.request.contextPath}/resources/_bootswatch.scss" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/resources/_variables.scss" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/resources/bootstrap.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/resources/bootstrap.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+			});
+		</script>
 	</head>
 	
 	<body>

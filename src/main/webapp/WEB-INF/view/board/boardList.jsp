@@ -26,7 +26,7 @@
 						<c:if test="${loginMember != null}">
 							${loginMember.memberName}님
 							<a href="${pageContext.request.contextPath}/">MYPAGE</a>
-							<a href="${pageContext.request.contextPath}/LogoutController">LOGOUT</a>
+							<a href="${pageContext.request.contextPath}/member/logout">LOGOUT</a>
 						</c:if>
 						
 						<c:if test="${loginMember == null}">
@@ -37,12 +37,38 @@
 				</div>
 			</div>
 		</div>
-		<div>
-			<a href="${pageContext.request.contextPath}/addBoardFormController">글등록</a>
-		</div>
-		
 		<div class="content">
-			<form id="pageForm" method="get" action="${pageContext.request.contextPath}/BoardListController">
+			<div>
+				<a href="${pageContext.request.contextPath}/addBoardFormController">글등록</a>
+			</div>
+			
+			<div class="board-list">
+				<table class="board-list table">
+					<thead class="board-listheader">
+						<tr>
+							<th>게시글 번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<tbody class="board-list teble ">
+						<c:forEach var="b" items="${boardList}">
+							<tr>
+								<td>${b.boardNo}</td>
+								<td>
+									<a href="${pageContext.request.contextPath}/board/BoardList?boardNo=${b.boardNo}">
+										${b.boardTitle}
+									</a>
+								</td>
+								<td>${b.memberId}</td>
+								<td>${b.createdate}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table> 
+			</div>
+			<form id="pageForm" method="get" action="${pageContext.request.contextPath}/board/BoardList">
 				<select name="rowPerPage" id="rowPerPage">
 					<c:if test="${rowPerPage == 10}">
 						<option value="10" selected="selected">10</option>
@@ -65,36 +91,9 @@
 				<input name="word" type="text" placeholder="검색">
 				<button type="button">검색</button>
 			</form>
-			<div class="board-list">
-				<table class="board-list table">
-					<thead class="board-listheader">
-						<tr>
-							<th>게시글 번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-						</tr>
-					</thead>
-					<tbody class="board-list teble ">
-						<c:forEach var="b" items="${boardList}">
-							<tr>
-								<td>${b.boardNo}</td>
-								<td>
-									<a href="${pageContext.request.contextPath}/BoardListOneController?boardNo=${b.boardNo}">
-										${b.boardTitle}
-									</a>
-								</td>
-								<td>${b.memberId}</td>
-								<td>${b.createdate}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table> 
-			</div>
-			
 			<div>
-				<a href="${pageContext.request.contextPath}/BoardListController?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
-				<a href="${pageContext.request.contextPath}/BoardListController?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+				<a href="${pageContext.request.contextPath}/board/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
+				<a href="${pageContext.request.contextPath}/board/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
 			</div>
 		</div>
 		

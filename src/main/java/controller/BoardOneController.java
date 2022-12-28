@@ -14,8 +14,8 @@ import service.BoardService;
 import vo.Board;
 
 
-@WebServlet("/BoardListOneController")
-public class BoardListOneController extends HttpServlet {
+@WebServlet("/board/BoardOne")
+public class BoardOneController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -36,10 +36,6 @@ public class BoardListOneController extends HttpServlet {
 		// view와 공유할 모델 데이터 성정
 		request.setAttribute("board", board);
 		
-		// view 연결
-		// RequestDispatcher
-		// 1) include => 둘 다 뷰가 있을때
-		// 2) forward => 뷰가 없는 페이지와 뷰가 있는 페이지를 연결
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardOne.jsp");
 		rd.forward(request, response);
 	}

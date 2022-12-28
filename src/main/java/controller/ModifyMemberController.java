@@ -7,13 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/member/logout")
-public class LogoutController extends HttpServlet {
+@WebServlet("/member/ModifyMember")
+public class ModifyMemberController extends HttpServlet {
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션 정보 삭제
-		// 홈으로 이동
-		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath()+"/BoardListController");
-   }
+		// 수정 폼
+		// /member/modifyMember.jsp
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 수정 액션
+		// 리다이렉트 -> member/memberOne?키값  컨트롤러 요청
+	}
+
 }

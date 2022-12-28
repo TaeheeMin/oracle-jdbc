@@ -11,10 +11,27 @@ import javax.servlet.http.HttpSession;
 import service.MemberService;
 import vo.Member;
 
-@WebServlet("/LoginActionController")
-public class LoginActionController extends HttpServlet {
+@WebServlet("/LoginController")
+public class LoginController extends HttpServlet {
 	private MemberService memberService;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember != null) { // 이미 로그인 상태
+			System.out.println("로그인 중");
+			response.sendRedirect(request.getContextPath()+"/BoardListController");
+			return;
+		}
+      
+		// 폼 View
+		request.getRequestDispatcher("/WEB-INF/view/loginForm.jsp").forward(request, response);
+	}
+
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 액션
+		// 로그인 세션 정보 session.Atrribute("loginMember", Member)
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		// 로그인O -> list 이동
@@ -58,4 +75,5 @@ public class LoginActionController extends HttpServlet {
 	    session.setAttribute("loginMember", returnMember);
 	    response.sendRedirect(request.getContextPath()+"/BoardListController");
 	}
+
 }

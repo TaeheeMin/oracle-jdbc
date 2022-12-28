@@ -25,7 +25,6 @@
 	height: 100%;
 	box-sizing : border-box;
 	min-height: 600px;
-	padding: 85px 0px 0px;
 }
 .board-list {
 	max-width: 965px;
@@ -56,9 +55,10 @@
 	border:1px solid #dfdfdf;
 	border-bottom-width:0;
 	color:#353535;
-	text-align:left;
+	text-align:center;
 	font-weight:normal;
 	background-color:#fff;
+	text-align:center;
 }
 .teble.typeList table{
 	border-top:1px solid #eaeaea;

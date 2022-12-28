@@ -12,10 +12,21 @@ import service.BoardService;
 import vo.Board;
 import vo.Member;
 
+@WebServlet("/board/AddBoard")
+public class AddBoardController extends HttpServlet {
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		// 로그인X -> 로그인폼 이동
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			System.out.println("로그인 필요");
+			response.sendRedirect(request.getContextPath()+"/LoginFormController");
+			return;
+		}
+		request.getRequestDispatcher("/WEB-INF/view/addBoardForm.jsp").forward(request, response);
+	}
 
-@WebServlet("/AddBoardActionController")
-public class AddBoardActionController extends HttpServlet {
-    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
@@ -54,4 +65,5 @@ public class AddBoardActionController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/AddBoardFormController");
 		}
 	}
+
 }

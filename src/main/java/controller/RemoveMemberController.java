@@ -8,12 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/member/logout")
-public class LogoutController extends HttpServlet {
+@WebServlet("/member/RemoveMember")
+public class RemoveMemberController extends HttpServlet {
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션 정보 삭제
-		// 홈으로 이동
-		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath()+"/BoardListController");
-   }
+		// 회원탈퇴 폼
+		// /member/removeMember.jsp
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 로그아웃 컨트롤러 요청
+	
+	}
+
 }

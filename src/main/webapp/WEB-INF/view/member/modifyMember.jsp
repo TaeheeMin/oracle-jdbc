@@ -4,38 +4,34 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>개인정보 수정</title>
+		<title>Mypage</title>
 	</head>
 	
 	<body>
-		<h1>개인정보 수정</h1>
-		<div>
-			<a href="${pageContext.request.contextPath}/BoardList">홈으로</a>
-			<a href="${pageContext.request.contextPath}/RemoveMember">회원탈퇴</a>
-		</div>
+		<!-- #### navbar #### -->
+		<jsp:include page="/inc/navbar.jsp"></jsp:include>
 		
-		<form action="${pageContext.request.contextPath}/ModifyMember" method="post">
-			<table border="1">
-				<tr>
-					<th>아이디</th>
-					<td>
-						${member.memberId}
-					</td>
-				</tr>
-				<tr>
-					<th>이름</th>
-					<td>
-						<input type="text" name="memberName" placeholder="${member.memberName}">
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td>
-						<input type="password" name="memberPw">
-					</td>
-				</tr>
-			</table>
-			<button type="submit">수정</button>
-		</form>
+		<!-- #### content #### -->
+		<div class="container">
+			<div class="head">
+				<h1>Mypage</h1>
+				<h3><small class="text-muted">정보수정</small></h3>
+			</div>
+			
+			<!-- #### 수정폼 #### -->
+			<form action="${pageContext.request.contextPath}/ModifyMember" method="post">
+				<div class="form-group"  style="padding-bottom: 20px;">
+					<fieldset disabled="">
+						<label class="form-label" for="disabledInput">ID</label>
+						<input class="form-control" id="disabledInput" type="text" placeholder="${member.memberId}" disabled="">
+					</fieldset>
+				  	<label class="col-form-label mt-4" for="inputDefault">USER NAME</label>
+				  	<input type="text" class="form-control" placeholder="${member.memberName}" id="inputDefault" name="memberName">
+				  	<label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+	    			<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="memberPw">
+				</div>
+				<button type="submit" class="btn btn-dark">submit</button>
+			</form>
+		</div>
 	</body>
 </html>

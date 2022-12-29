@@ -37,11 +37,9 @@ public class BoardDao {
 				+ " FROM (SELECT rownum rnum, board_no, board_title, member_id, createdate"
 				+ "			 FROM (SELECT board_no, board_title, member_id, createdate"
 				+ "					 FROM board ORDER BY board_no DESC))"
-				+ " WHERE board_title LIKE ? AND rnum BETWEEN ? AND ?";
+				+ " WHERE board_title LIKE ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, "%"+word+"%");
-		stmt.setInt(2, beginRow);
-		stmt.setInt(3, endRow);
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			Board b = new Board();

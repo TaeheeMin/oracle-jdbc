@@ -4,34 +4,32 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>게시글 수정</title>
+		<title>Community</title>
 	</head>
 	
 	<body>
-		<h1>게시글 수정</h1>
-		<%
-			
-		%>
-		<div>
-			<a href="${pageContext.request.contextPath}/BoardList">홈으로</a>
-		</div>
+		<!-- #### navbar #### -->
+		<jsp:include page="/inc/navbar.jsp"></jsp:include>
 		
-		<form action="${pageContext.request.contextPath}/ModifyBoard?boardNo=${board.boardNo}" method="post">
-			<table border="1">
-				<tr>
-					<th>제목</th>
-					<td>
-						<input type="text" name="title" style="width:90%;" value="${board.boardTitle}">
-					</td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td>
-						<textarea rows="10" cols="100" name="content" >${board.boardContent}</textarea>
-					</td>
-				</tr>
-			</table>
-			<button type="submit">수정</button>
-		</form>
+		<!-- #### content #### -->
+		<div class="container">
+			<div class="head">
+				<h1>Community</h1>
+				<h3><small class="text-muted">BOARD LIST</small></h3>
+			</div>
+			
+			<!-- #### 게시글 #### -->
+			<form action="${pageContext.request.contextPath}/ModifyBoard?boardNo=${board.boardNo}" method="post">
+				<div class="form-group" style="padding-bottom: 20px;">
+					<fieldset>
+					 	<label class="form-label mt-4" for="readOnlyInput">TITLE</label>
+					 	<input class="form-control" id="readOnlyInput" type="text" name="title" placeholder="${board.boardTitle}">
+					</fieldset>
+					<label for="exampleTextarea" class="form-label mt-4">CONTENT</label>
+					<textarea class="form-control" id="exampleTextarea" rows="10" name="content">${board.boardContent}</textarea>
+				</div>
+				<button type="submit" class="btn btn-dark">submit</button>
+			</form>
+		</div>
 	</body>
 </html>

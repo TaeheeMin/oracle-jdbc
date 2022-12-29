@@ -21,7 +21,7 @@ public class AddBoardController extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember == null) {
 			System.out.println("로그인 필요");
-			response.sendRedirect(request.getContextPath()+"/Login");
+			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}
 		request.getRequestDispatcher("/WEB-INF/view/board/addBoardForm.jsp").forward(request, response);

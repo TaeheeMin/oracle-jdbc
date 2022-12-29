@@ -4,218 +4,140 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>BOARD LIST</title>
-		<link href="${pageContext.request.contextPath}/resources/_bootswatch.scss" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/resources/_variables.scss" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/resources/bootstrap.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/resources/bootstrap.min.css" rel="stylesheet">
+		<title>Community</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function() {
 				$('#rowPerPage').change(function() {
-					$('#pageForm').submit();
+					$('#listForm').submit();
 				});
-				$('#search').blur(function() {
-					$('#searchForm').submit();
-				}); 
+				
+				$('#search').change(function() {
+					$('#listForm').submit();
+				});
+				
+				$(window).scroll( function() {
+					if ( $( this ).scrollTop() > 200 ) {
+						$('.top').fadeIn();
+					} else {
+						$('.top').fadeOut();
+					}
+				});
+				
+				$('.top').click( function() {
+					$('html, body').animate( { scrollTop : 0 }, 400 );
+					return false;
+				} );
 			});
 		</script>
 	</head>
 	
 	<body>
-	
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor03">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Home
-            <span class="visually-hidden">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
-	
-		<div class="head">
-			<div class="logo">BOARD LIST</div>
-			<div class="right">
-				<div class="in">
-					<c:if test="${loginMember != null}">
-						${loginMember.memberName}님
-						<a href="${pageContext.request.contextPath}/ModifyMember">MYPAGE</a>
-						<a href="${pageContext.request.contextPath}/Logout">LOGOUT</a>
-					</c:if>
-					<c:if test="${loginMember == null}">
-						<a href="${pageContext.request.contextPath}/LoginController">LOGIN</a>
-						<a href="${pageContext.request.contextPath}/AddMember">SIGNIN</a>
-					</c:if>
-				</div>
-			</div>
-		</div>
-		<div class="content">
-			<div class="board_nav">
-			<span>Community</span>
-			<form id="pageForm" method="get" action="${pageContext.request.contextPath}/BoardList">
-				<select name="rowPerPage" id="rowPerPage">
-					<c:if test="${rowPerPage == 10}">
-						<option value="10" selected="selected">10</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-					</c:if>
-					<c:if test="${rowPerPage == 20}">
-						<option value="10">10</option>
-						<option value="20" selected="selected">20</option>
-						<option value="30">30</option>
-					</c:if>
-					<c:if test="${rowPerPage == 30}">
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="30" selected="selected">30</option>
-					</c:if>
-				</select>
-			</form>
+		<!-- #### navbar #### -->
+		<jsp:include page="/inc/navbar.jsp"></jsp:include>
+		
+		<!-- #### content #### -->
+		<div class="container">
+			<div class="head">
+				<h1>Community</h1>
+				<h3><small class="text-muted">BOARD LIST</small></h3>
 			</div>
 			
-			<div class="container">
-				<div class="board-list">
-					<table class="board-list table">
-						<thead class="board-listheader">
-							<tr>
-								<th>No</th>
-								<th>TITLE</th>
-								<th>USER</th>
-								<th>DATE</th>
-							</tr>
-						</thead>
-						<tbody class="board-list teble ">
-							<c:forEach var="b" items="${boardList}">
-								<tr>
-									<td>${b.boardNo}</td>
-									<td>
-										<a href="${pageContext.request.contextPath}/BoardOne?boardNo=${b.boardNo}">
-											${b.boardTitle}
-										</a>
-									</td>
-									<td>${b.memberId}</td>
-									<td>${b.createdate}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				
-				<table class="table table-hover">
-				  <thead>
-				    <tr>
-				      <th scope="col">Type</th>
-				      <th scope="col">Column heading</th>
-				      <th scope="col">Column heading</th>
-				      <th scope="col">Column heading</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr class="table-active">
-				      <th scope="row">Active</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">Default</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				    <tr class="table-primary">
-				      <th scope="row">Primary</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				    <tr class="table-secondary">
-				      <th scope="row">Secondary</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				    <tr class="table-success">
-				      <th scope="row">Success</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				    <tr class="table-danger">
-				      <th scope="row">Danger</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				    <tr class="table-warning">
-				      <th scope="row">Warning</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				    <tr class="table-info">
-				      <th scope="row">Info</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				    <tr class="table-light">
-				      <th scope="row">Light</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				    <tr class="table-dark">
-				      <th scope="row">Dark</th>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				      <td>Column content</td>
-				    </tr>
-				  </tbody>
-				</table>
-				
+			<!-- #### 글쓰기 #### -->
+			<a href="${pageContext.request.contextPath}/AddBoard">글쓰기</a>
+			
+			<!-- #### 검색 #### -->
+			<div style="float: right;">
+				<form id="listForm" method="get" action="${pageContext.request.contextPath}/BoardList">
+       				<select name="rowPerPage" id="rowPerPage" class="">
+						<c:if test="${rowPerPage == 10}">
+							<option value="10" selected="selected">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+						</c:if>
+						<c:if test="${rowPerPage == 20}">
+							<option value="10">10</option>
+							<option value="20" selected="selected">20</option>
+							<option value="30">30</option>
+						</c:if>
+						<c:if test="${rowPerPage == 30}">
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30" selected="selected">30</option>
+						</c:if>
+					</select>
+					
+					<select name="category" id="category" class="">
+							<option value="title" selected="selected">제목</option>
+							<option value="content">내용</option>
+							<option value="name">작성자</option>
+					</select>
+					
+					<input type="search" placeholder="Search" name="word" id="search">
+					
+       				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+				</form>
 			</div>
 			
-			<a href="${pageContext.request.contextPath}/AddBoard">글등록</a> 
-			<form id="searchForm" method="get" action="${pageContext.request.contextPath}/BoardList">
-				<input id="search" name="word" type="text" placeholder="검색">
-			</form>
-			<div class="paginate">
-				<a href="${pageContext.request.contextPath}/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
-				<a href="${pageContext.request.contextPath}/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+			<!-- #### list #### -->
+			<table class="table table-hover">
+				<thead>
+				  	<tr class="table-active">
+				    	<th>No</th>
+				      	<th>TITLE</th>
+				      	<th>USER</th>
+				      	<th>DATE</th>
+				      	<th>VIEW</th>
+				    </tr>
+			  	</thead>
+			  	<tbody>
+			  		<c:forEach var="b" items="${boardList}">
+			     		<tr class="table-light">
+			      			<th>${b.boardNo}</th>
+			      			<td>
+						      	<a href="${pageContext.request.contextPath}/BoardOne?boardNo=${b.boardNo}">
+									${b.boardTitle}
+								</a>
+							</td>
+					      	<td>${b.memberId}</td>
+					      	<td>${b.createdate.substring(0,10)}</td>
+					      	<td>0</td>
+		    			</tr>
+					</c:forEach>
+			  	</tbody>
+			</table>
+			
+			<!-- #### 페이징 #### -->
+			<div class="pagination-center" style="height: 50px;width: 250px;">
+		  		<ul class="pagination" >
+			    	<li class="page-item disabled">
+			      		<a class="page-link" href="#">&laquo;</a>
+			    	</li>
+			    	<li class="page-item active">
+			      		<a class="page-link" href="#">1</a>
+			    	</li>
+		    		<li class="page-item">
+			      		<a class="page-link" href="#">2</a>
+				    </li>
+				    <li class="page-item">
+				      	<a class="page-link" href="#">3</a>
+				    </li>
+				    <li class="page-item">
+				      	<a class="page-link" href="#">4</a>
+				    </li>
+				    <li class="page-item">
+				      	<a class="page-link" href="#">5</a>
+				    </li>
+				    <li class="page-item">
+				      	<a class="page-link" href="#">&raquo;</a>
+				    </li>
+			  	</ul>
 			</div>
+			<a href="${pageContext.request.contextPath}/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
+			<a href="${pageContext.request.contextPath}/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
 		</div>
+		
+	<!--  #### TOP 스크롤 버튼 #### -->
+	<button type="button" class="top moveTopBtn">^</button>
 	</body>
 </html>

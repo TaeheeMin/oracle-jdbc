@@ -4,32 +4,36 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>게시물 등록</title>
+		<title>Community</title>
 	</head>
 	
 	<body>
-		<h1>게시글 등록</h1>
+		<!-- #### navbar #### -->
+		<jsp:include page="/inc/navbar.jsp"></jsp:include>
 		
-		<div>
-			<a href="${pageContext.request.contextPath}/BoardList">홈으로</a>
+		<!-- #### content #### -->
+		<div class="container">
+			<div class="head">
+				<h1>Community</h1>
+				<h3><small class="text-muted">BOARD LIST</small></h3>
+			</div>
+			<div class="bs-component">
+				<form action="${pageContext.request.contextPath}/AddBoard" method="post">
+	  				<fieldset>
+	    				<div class="form-group row">
+	    					<label class="col-form-label mt-4" for="inputDefault">TITLE</label>
+	      					<div class="col-sm-10">
+	  							<input type="text" class="form-control" id="inputDefault" placeholder="제목을 입력해 주세요" name="title" >
+						    </div>
+					    </div>
+					    <div class="form-group" style="padding-bottom: 20px;">
+						      <label for="exampleTextarea" class="form-label mt-4">CONTENT</label>
+						      <textarea class="form-control" id="exampleTextarea" rows="10" name="content" placeholder="내용을 입력해 주세요"></textarea>
+					    </div>
+	    				<button type="submit" class="btn btn-dark">Submit</button>
+	  				</fieldset>
+				</form>
+			</div>
 		</div>
-		
-		<form action="${pageContext.request.contextPath}/AddBoard" method="post">
-			<table border="1">
-				<tr>
-					<th>제목</th>
-					<td>
-						<input type="text" name="title" style="width:90%;">
-					</td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td>
-						<textarea rows="10" cols="100" name="content"></textarea>
-					</td>
-				</tr>
-			</table>
-			<button type="submit">등록</button>
-		</form>
 	</body>
 </html>

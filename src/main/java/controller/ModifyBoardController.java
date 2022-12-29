@@ -20,6 +20,13 @@ public class ModifyBoardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			System.out.println("로그인 필요");
+			response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}
 		
 		// 유효성 검사 
 		if(request.getParameter("boardNo") == null) {
@@ -46,6 +53,11 @@ public class ModifyBoardController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			System.out.println("로그인 필요");
+			response.sendRedirect(request.getContextPath()+"/Login");
+			return;
+		}
 		
 		// 유효성 검사 
 		if(request.getParameter("title") == null || request.getParameter("title").equals("")

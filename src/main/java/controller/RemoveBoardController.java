@@ -19,6 +19,11 @@ public class RemoveBoardController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			System.out.println("로그인 필요");
+			response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}
 		
 		// 유효성 검사 
 		if(request.getParameter("boardNo") == null) {

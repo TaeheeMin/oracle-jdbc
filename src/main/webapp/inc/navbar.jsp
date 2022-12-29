@@ -4,34 +4,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Home</title>
 		<link href="${pageContext.request.contextPath}/resources/_bootswatch.scss" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/resources/_variables.scss" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/resources/bootstrap.css" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-		<script>
-			$(document).ready(function() {
-				$(window).scroll( function() {
-					if ( $( this ).scrollTop() > 200 ) {
-						$('#navbar').fadeIn();
-					} else {
-						$('#navbar').fadeOut();
-					}
-				});
-				
-				$(window).scroll( function() {
-					if ( $( this ).scrollTop() > 200 ) {
-						$('.top').fadeIn();
-					} else {
-						$('.top').fadeOut();
-					}
-				});
-				$('.top').click( function() {
-					$('html, body').animate( { scrollTop : 0 }, 400 );
-					return false;
-				} );
-			});
-		</script>
+  		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	</head>
 	
 	<body>
@@ -54,27 +30,21 @@
 				        <li class="nav-item">
 				          	<a class="nav-link" href="${pageContext.request.contextPath}/BoardList">Community</a>
 				        </li>
+				        <li class="nav-item dropdown">
+				          	<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+			          		<div class="dropdown-menu">
+			            		<a class="dropdown-item" href="${pageContext.request.contextPath}/ModifyMember">Mypage</a>
+					            <a class="dropdown-item" href="#">게시글 관리?</a>
+					            <a class="dropdown-item" href="${pageContext.request.contextPath}/RemoveMember">회원탈퇴</a>
+			          		</div>
+				        </li>
       				</ul>
+			      	<div class="d-flex">
+						<div style="padding-right: 1rem">${loginMember.memberName}님</div>
+						<a style="padding-right: 1rem" href="${pageContext.request.contextPath}/Logout">LOGOUT</a>
+					</div>
 				</div>
 			</div>
 		</nav>
-		
-		<!-- #### 상단 #### -->
-		<div class="container">
-			<div class="head">
-				<h1>Home</h1>
-				<h3><small class="text-muted">회원가입, 로그인 넣기</small></h3>
-				<a href="${pageContext.request.contextPath}/LoginController">LOGIN</a>
-				<a href="${pageContext.request.contextPath}/AddMember">SIGNIN</a>
-			</div>
-		</div>
-		
-		<!-- #### about #### -->
-		<div class="container">
-			<div class="head">
-				<h1>About</h1>
-				<h3><small class="text-muted">게시판 설명 넣기 이 프로젝트 설명 넣어주기, 어떤 기술 썼는지 어떤 기능이 있는지 추가하면 좋을거같음</small></h3>
-			</div>
-		</div>
 	</body>
 </html>

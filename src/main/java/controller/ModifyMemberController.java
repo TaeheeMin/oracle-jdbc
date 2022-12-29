@@ -24,6 +24,11 @@ public class ModifyMemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			System.out.println("로그인 필요");
+			response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}
 		String memberId = (String)loginMember.getMemberId();
 		// System.out.println(memberId);
 		
@@ -42,7 +47,7 @@ public class ModifyMemberController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		String memberId = (String)loginMember.getMemberId();
-		System.out.println(memberId);
+		// System.out.println(memberId);
 		
 		// 유효성 검사 
 		if(request.getParameter("memberName") == null || request.getParameter("memberName").equals("")
@@ -51,10 +56,7 @@ public class ModifyMemberController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/ModifyMember");
 			return;
 		}
-		System.out.println(request.getParameter("memberName"));
-		System.out.println(request.getParameter("memberPw"));
-		System.out.println();
-		
+
 		// 값 받아오기
 		Member member = new Member();
 		member.setMemberId(memberId);
@@ -65,7 +67,6 @@ public class ModifyMemberController extends HttpServlet {
 		int result = 0;
 		MemberService memberService = new MemberService();
 		result = memberService.modifyMember(member);
-		System.out.println(result);
 		
 		// 결과
 		if(result == 1) {

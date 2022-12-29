@@ -17,12 +17,20 @@ import vo.Member;
 public class RemoveMemberController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			System.out.println("로그인 필요");
+			response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}
+		
 		// 폼 View
 		request.getRequestDispatcher("/WEB-INF/view/member/removeMember.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 로그아웃 컨트롤러 요청
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");

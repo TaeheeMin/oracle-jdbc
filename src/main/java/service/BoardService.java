@@ -106,6 +106,7 @@ public class BoardService {
 		}
 		return list;
 	}
+	
 	// 1-4) boardone
 	public Board getBoardOne(int boardNo) {
 		Connection conn = null;
@@ -115,7 +116,7 @@ public class BoardService {
 			boardDao = new BoardDao();
 			if(this.boardDao.selectboardOne(conn, boardNo) != null ){
 				board = this.boardDao.selectboardOne(conn, boardNo);
-				this.boardDao.updateCount(conn);
+				this.boardDao.updateCount(conn, boardNo);
 				// 실패시 예외발생시 catch로 이동해 롤백됨
 			}
 			conn.commit(); // DBUtil setAutoCommit false설정

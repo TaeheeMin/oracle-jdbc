@@ -50,12 +50,13 @@ public class BoardListController extends HttpServlet {
 		}
 		System.out.println("category : " + category);
 		
-		// 4) 카테고리
+		// 4) 검색어
 		String word = request.getParameter("word");
 		System.out.println("word : " + word);
 		
 		this.boardService = new BoardService();
 		ArrayList<Board> list = new ArrayList<Board>();
+		
 		// 검색어 분기
 		if(word == null || word.equals("")) {
 			list = boardService.getBoardListByPage(currentPage, rowPerPage);

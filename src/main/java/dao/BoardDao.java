@@ -40,12 +40,11 @@ public class BoardDao {
 				+ "    FROM (SELECT rownum rnum, board_no, board_title, member_id, createdate, count"
 				+ "    FROM (SELECT board_no, board_title, member_id, createdate, count"
 				+ "    FROM board ORDER BY board_no DESC))"
-				+ "    WHERE ? like ? AND rnum BETWEEN ? AND ?";
+				+ "    WHERE "+category+" like ? AND rnum BETWEEN ? AND ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, category);
-		stmt.setString(2, "%" + word + "%");
-		stmt.setInt(3, beginRow);
-		stmt.setInt(4, endRow);
+		stmt.setString(1, "%" + word + "%");
+		stmt.setInt(2, beginRow);
+		stmt.setInt(3, endRow);
 		
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
@@ -104,7 +103,7 @@ public class BoardDao {
 			board.setBoardContent(rs.getString("boardContent"));
 			board.setMemberId(rs.getString("memberId"));
 			board.setCreatedate(rs.getString("createdate"));
-			board.setCount(rs.getInt("count")+1);;
+			board.setCount(rs.getInt("count"));
 		}
 		return board;
 	}
@@ -144,11 +143,12 @@ public class BoardDao {
 	}
 	
 	// 3-2) 게시글 조회수 업데이트
-	public int updateCount(Connection conn ) throws Exception {
+	public int updateCount(Connection conn, int boardNo) throws Exception {
 		int result = 0;
 		PreparedStatement stmt = null;
-		String sql = "UPDATE board SET count = count+1";
+		String sql = "UPDATE board SET count = count + 1 WHERE board_no = ?";
 		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, boardNo);
 		result = stmt.executeUpdate();
 		return result;
 	}

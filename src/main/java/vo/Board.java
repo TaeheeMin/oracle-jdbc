@@ -7,16 +7,18 @@ public class Board {
 	private String memberId;
 	private String updatedate;
 	private String createdate;
+	private int count;
 	
 	// 모든 필드 가진 생성자
 	public Board(int boardNo, String boardTitle, String boardContent, String memberId, String updatedate,
-			String createdate) {
+			String createdate, int count) {
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.memberId = memberId;
 		this.updatedate = updatedate;
 		this.createdate = createdate;
+		this.count = count;
 	}
 
 	// 기본생성자
@@ -29,9 +31,16 @@ public class Board {
 	// toString() 오브젝트 this생략
 	public String toString() { // 디버깅시 객체 멤버를 출력할 때 사용하는 
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", memberId=" + memberId + ", updatedate=" + updatedate + ", createdate=" + createdate + "]";
+				+ ", memberId=" + memberId + ", updatedate=" + updatedate + ", createdate=" + createdate + ", count=" + count +"]";
 	}
 	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public int getBoardNo() {
 		return boardNo;
 	}

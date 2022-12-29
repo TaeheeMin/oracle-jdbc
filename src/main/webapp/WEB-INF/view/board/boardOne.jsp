@@ -21,6 +21,7 @@
 			<!-- #### 게시글 #### -->
 			<div class="form-group">
 			  	<fieldset>
+			  		<h6 style="float: right">Hit ${board.count}</h6>
 			    	<label class="form-label mt-4" for="readOnlyInput">TITLE</label>
 			    	<input class="form-control" id="readOnlyInput" type="text" readonly="readonly" value="${board.boardTitle}">
 			  	</fieldset>
@@ -31,21 +32,13 @@
 		    </div>
 			
 			<!-- #### 수정 삭제 #### -->
+			
 			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-dark">
-					목록
-				</button>
-				<button type="button" class="btn btn-dark">
-					수정
-				</button>
-				<button type="button" class="btn btn-dark">
-					삭제
-				</button>
-			</div>
-			<div>
-				<a href="${pageContext.request.contextPath}/BoardList">목록</a>
-				<a href='${pageContext.request.contextPath}/ModifyBoard?boardNo=${board.boardNo}'>수정</a>
-				<a href='${pageContext.request.contextPath}/RemoveBoard?boardNo=${board.boardNo}'>삭제</a>
+				<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/BoardList'">LIST</button>
+				<c:if test="${board.memberId.equals(loginMember.memberId)}">
+					<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyBoard?boardNo=${board.boardNo}'">UPDATE</button>
+					<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/RemoveBoard?boardNo=${board.boardNo}'">DELETE</button>
+				</c:if>
 			</div>
 		</div>
 	</body>

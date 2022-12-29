@@ -14,9 +14,8 @@ import service.BoardService;
 import vo.Board;
 import vo.Member;
 
-
-@WebServlet("/BoardList")
-public class BoardListController extends HttpServlet {
+@WebServlet("/BoardListMember")
+public class BoardListMemberController extends HttpServlet {
 	private BoardService boardService;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,7 +27,7 @@ public class BoardListController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}
-		
+
 		// 1) currentPage		
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
@@ -37,39 +36,18 @@ public class BoardListController extends HttpServlet {
 		// System.out.println("currentPage : " + currentPage);
 		
 		// 2) rowPerPage
-		int rowPerPage = 10;
-		if(request.getParameter("rowPerPage") != null) {
-			rowPerPage = Integer.parseInt(request.getParameter("rowPerPage"));
-		}
-		// System.out.println("rowPerPage : " + rowPerPage);
+		int rowPerPage = 15; // 내 게시글 보기는 고정
 		
-		// 3) 카테고리
-		String category = request.getParameter("category"); 
-		if(request.getParameter("category") == null) {
-			category = "board_title";
-		}
-		System.out.println("category : " + category);
-		
-		// 4) 카테고리
-		String word = request.getParameter("word");
-		System.out.println("word : " + word);
-		
+		String memberId = loginMember.getMemberId();
 		this.boardService = new BoardService();
 		ArrayList<Board> list = new ArrayList<Board>();
-		// 검색어 분기
-		if(word == null || word.equals("")) {
-			list = boardService.getBoardListByPage(currentPage, rowPerPage);
-			System.out.println("검색안됨");
-		} else if(word != null ){
-			list = boardService.getBoardListBySearch(currentPage, rowPerPage, category ,word);
-			System.out.println("검색함");
-			System.out.println("category : " + category + " / word : " + word );
-		}
+	
+		list = boardService.getBoardListByMember(currentPage, rowPerPage, memberId);
 		
 		request.setAttribute("boardList", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("rowPerPage", rowPerPage);
-		request.setAttribute("word", word);
-		request.getRequestDispatcher("WEB-INF/view/board/boardList.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/member/memberBoard.jsp").forward(request, response);
 	}
+
 }

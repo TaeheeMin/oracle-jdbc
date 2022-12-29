@@ -31,10 +31,10 @@
 				          	<a class="nav-link" href="${pageContext.request.contextPath}/BoardList">Community</a>
 				        </li>
 				        <li class="nav-item dropdown">
-				          	<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
-			          		<div class="dropdown-menu">
+				          	<a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+			          		<div class="dropdown-menu" data-bs-popper="static">
 			            		<a class="dropdown-item" href="${pageContext.request.contextPath}/ModifyMember">Mypage</a>
-					            <a class="dropdown-item" href="#">게시글 관리?</a>
+					            <a class="dropdown-item" href="${pageContext.request.contextPath}/BoardListMember">게시글 관리</a>
 					            <a class="dropdown-item" href="${pageContext.request.contextPath}/RemoveMember">회원탈퇴</a>
 			          		</div>
 				        </li>

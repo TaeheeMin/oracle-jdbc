@@ -12,10 +12,6 @@
 					$('#listForm').submit();
 				});
 				
-				$('#search').change(function() {
-					$('#listForm').submit();
-				});
-				
 				$(window).scroll( function() {
 					if ( $( this ).scrollTop() > 200 ) {
 						$('.top').fadeIn();
@@ -67,20 +63,20 @@
 						</c:if>
 					</select>
 					
-					<select name="category" id="category" class="">
-							<option value="title" selected="selected">제목</option>
-							<option value="content">내용</option>
-							<option value="name">작성자</option>
+					<select name="category" id="category">
+						<option value="board_title">제목</option>
+						<option value="board_content">내용</option>
+						<option value="member_id">작성자</option>
 					</select>
 					
-					<input type="search" placeholder="Search" name="word" id="search">
+					<input type="search" placeholder="Search" name="word" id="search" value="${word}">
 					
        				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
 				</form>
 			</div>
 			
 			<!-- #### list #### -->
-			<table class="table table-hover">
+			<table class="table">
 				<thead>
 				  	<tr class="table-active">
 				    	<th>No</th>
@@ -101,7 +97,7 @@
 							</td>
 					      	<td>${b.memberId}</td>
 					      	<td>${b.createdate.substring(0,10)}</td>
-					      	<td>0</td>
+					      	<td>${b.count}</td>
 		    			</tr>
 					</c:forEach>
 			  	</tbody>

@@ -9,12 +9,12 @@ import vo.Board;
 
 public class BoardDao {
 	// 1) list
-	// 1-2) 전체 list
+	// 1-1) 전체 list
 	public ArrayList<Board> selectBoardListByPage(Connection conn, int beginRow, int endRow) throws Exception {
 		ArrayList<Board> list = new ArrayList<Board>();
-		String sql = "SELECT board_no boardNo, board_title boardTitle, member_id memberId, createdate"
-				+ " FROM (SELECT rownum rnum, board_no, board_title, member_id, createdate"
-				+ "			 FROM (SELECT board_no, board_title, member_id, createdate"
+		String sql = "SELECT board_no boardNo, board_title boardTitle, member_id memberId, createdate, count"
+				+ " FROM (SELECT rownum rnum, board_no, board_title, member_id, createdate, count"
+				+ "			 FROM (SELECT board_no, board_title, member_id, createdate, count"
 				+ "					 FROM board ORDER BY board_no DESC))"
 				+ " WHERE rnum BETWEEN ? AND ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -27,19 +27,26 @@ public class BoardDao {
 			b.setBoardTitle(rs.getString("boardTitle"));
 			b.setMemberId(rs.getString("memberId"));
 			b.setCreatedate(rs.getString("createdate"));
+			b.setCount(rs.getInt("count"));
 			list.add(b);
 		}
 		return list;
 	}
-	public ArrayList<Board> selectBoardListBySearch(Connection conn, int beginRow, int endRow, String word) throws Exception {
+	
+	// 1-2) 검색 리스트
+	public ArrayList<Board> selectBoardListBySearch(Connection conn, int beginRow, int endRow, String category, String word) throws Exception {
 		ArrayList<Board> list = new ArrayList<Board>();
-		String sql = "SELECT board_no boardNo, board_title boardTitle, member_id memberId, createdate"
-				+ " FROM (SELECT rownum rnum, board_no, board_title, member_id, createdate"
-				+ "			 FROM (SELECT board_no, board_title, member_id, createdate"
-				+ "					 FROM board ORDER BY board_no DESC))"
-				+ " WHERE board_title LIKE ?";
+		String sql ="SELECT board_no boardNo, board_title boardTitle, member_id memberId, createdate, count"
+				+ "    FROM (SELECT rownum rnum, board_no, board_title, member_id, createdate, count"
+				+ "    FROM (SELECT board_no, board_title, member_id, createdate, count"
+				+ "    FROM board ORDER BY board_no DESC))"
+				+ "    WHERE ? like ? AND rnum BETWEEN ? AND ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, "%"+word+"%");
+		stmt.setString(1, category);
+		stmt.setString(2, "%" + word + "%");
+		stmt.setInt(3, beginRow);
+		stmt.setInt(4, endRow);
+		
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			Board b = new Board();
@@ -47,18 +54,46 @@ public class BoardDao {
 			b.setBoardTitle(rs.getString("boardTitle"));
 			b.setMemberId(rs.getString("memberId"));
 			b.setCreatedate(rs.getString("createdate"));
+			b.setCount(rs.getInt("count"));
 			list.add(b);
 		}
 		return list;
 	}
 	
-	// 1-2) 게시물 한 개
+	// 1-3) 내 게시글 리스트
+	public ArrayList<Board> selectBoardListByMember(Connection conn, int beginRow, int endRow, String memberId) throws Exception {
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "SELECT board_no boardNo, board_title boardTitle, member_id memberId, createdate, count"
+				+ " FROM (SELECT rownum rnum, board_no, board_title, member_id, createdate, count"
+				+ "			 FROM (SELECT board_no, board_title, member_id, createdate, count"
+				+ "					 FROM board WHERE member_id=? ORDER BY board_no DESC))"
+				+ " WHERE rnum BETWEEN ? AND ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, memberId);
+		stmt.setInt(2, beginRow);
+		stmt.setInt(3, endRow);
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			Board b = new Board();
+			b.setBoardNo(rs.getInt("boardNo"));
+			b.setBoardTitle(rs.getString("boardTitle"));
+			b.setMemberId(rs.getString("memberId"));
+			b.setCreatedate(rs.getString("createdate"));
+			b.setCount(rs.getInt("count"));
+			list.add(b);
+		}
+		return list;
+	}
+	
+	// 1-4) 게시물 한 개
 	public Board selectboardOne(Connection conn, int boardNo) throws Exception {
 		Board board = new Board();
 		String sql = "SELECT board_no boardNo"
 				+ ", board_title boardTitle"
 				+ ", board_content boardContent"
+				+ ", member_id memberId"
 				+ ", createdate"
+				+ ", count"
 				+ " FROM board WHERE board_no = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, boardNo);
@@ -67,7 +102,9 @@ public class BoardDao {
 			board.setBoardNo(rs.getInt("boardNo"));
 			board.setBoardTitle(rs.getString("boardTitle"));
 			board.setBoardContent(rs.getString("boardContent"));
+			board.setMemberId(rs.getString("memberId"));
 			board.setCreatedate(rs.getString("createdate"));
+			board.setCount(rs.getInt("count")+1);;
 		}
 		return board;
 	}
@@ -92,15 +129,26 @@ public class BoardDao {
 	}
 	
 	// 3) update
+	// 3-1) 게시글 업데이트
 	public int updateBoard(Connection conn, Board board) throws Exception {
 		int result = 0;
 		PreparedStatement stmt = null;
-		String sql ="UPDATE board SET board_title =?, board_content=? WHERE board_no=? AND member_id =?";
+		String sql = "UPDATE board SET board_title =?, board_content=? WHERE board_no=? AND member_id =?";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, board.getBoardTitle());
 		stmt.setString(2, board.getBoardContent());
 		stmt.setInt(3, board.getBoardNo());
 		stmt.setString(4, board.getMemberId());
+		result = stmt.executeUpdate();
+		return result;
+	}
+	
+	// 3-2) 게시글 조회수 업데이트
+	public int updateCount(Connection conn ) throws Exception {
+		int result = 0;
+		PreparedStatement stmt = null;
+		String sql = "UPDATE board SET count = count+1";
+		stmt = conn.prepareStatement(sql);
 		result = stmt.executeUpdate();
 		return result;
 	}

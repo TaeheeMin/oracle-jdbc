@@ -48,11 +48,11 @@ public class BoardListController extends HttpServlet {
 		if(request.getParameter("category") == null) {
 			category = "board_title";
 		}
-		System.out.println("category : " + category);
+		// System.out.println("category : " + category);
 		
 		// 4) 검색어
 		String word = request.getParameter("word");
-		System.out.println("word : " + word);
+		// System.out.println("word : " + word);
 		
 		this.boardService = new BoardService();
 		ArrayList<Board> list = new ArrayList<Board>();
@@ -60,17 +60,21 @@ public class BoardListController extends HttpServlet {
 		// 검색어 분기
 		if(word == null || word.equals("")) {
 			list = boardService.getBoardListByPage(currentPage, rowPerPage);
-			System.out.println("검색안됨");
+			// System.out.println("검색안됨");
 		} else if(word != null ){
 			list = boardService.getBoardListBySearch(currentPage, rowPerPage, category ,word);
-			System.out.println("검색함");
-			System.out.println("category : " + category + " / word : " + word );
+			// System.out.println("검색함");
+			// System.out.println("category : " + category + " / word : " + word );
 		}
+		
+		// 5) 페이징
+		int count = boardService.getBoardCount();
 		
 		request.setAttribute("boardList", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("rowPerPage", rowPerPage);
 		request.setAttribute("word", word);
+		request.setAttribute("count", count);
 		request.getRequestDispatcher("WEB-INF/view/board/boardList.jsp").forward(request, response);
 	}
 }

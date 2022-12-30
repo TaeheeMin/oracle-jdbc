@@ -47,6 +47,7 @@
 			<table class="table">
 				<thead>
 				  	<tr class="table-active">
+				  		<th><input class="form-check-input" type="checkbox" checked="checked" disabled="disabled"></th>
 				    	<th>No</th>
 				      	<th>TITLE</th>
 				      	<th>USER</th>
@@ -57,6 +58,9 @@
 			  	<tbody>
 			  		<c:forEach var="b" items="${boardList}">
 			     		<tr class="table-light">
+			     			<th>
+						        <input class="form-check-input" type="checkbox" value="" id="check">
+			     			</th>
 			      			<th>${b.boardNo}</th>
 			      			<td>
 						      	<a href="${pageContext.request.contextPath}/BoardOne?boardNo=${b.boardNo}">
@@ -72,7 +76,6 @@
 			</table>
 			<a href="${pageContext.request.contextPath}/BoardListMember?currentPage=${currentPage-1}">이전</a>
 			<a href="${pageContext.request.contextPath}/BoardListMember?currentPage=${currentPage+1}">다음</a>
-			
 		</div>
 		
 	<!--  #### TOP 스크롤 버튼 #### -->

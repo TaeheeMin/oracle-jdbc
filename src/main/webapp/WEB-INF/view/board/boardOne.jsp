@@ -18,17 +18,15 @@
 				<h3><small class="text-muted">BOARD LIST</small></h3>
 			</div>
 			
+	  		<span class="badge bg-info" style="float: right">Hit ${boardOne.count}</span>
 			<!-- #### 게시글 #### -->
-			<div class="form-group">
+			<div class="form-group" style="padding-bottom: 20px;">
 			  	<fieldset>
-			  		<h6 style="float: right">Hit ${boardOne.count}</h6>
 			    	<label class="form-label mt-4" for="readOnlyInput">TITLE</label>
 			    	<input class="form-control" id="readOnlyInput" type="text" readonly="readonly" value="${boardOne.boardTitle}">
+			      	<label for="exampleTextarea" class="form-label mt-4">CONTENT</label>
+			      	<textarea class="form-control" id="exampleTextarea" rows="10" name="content" readonly="readonly">${boardOne.boardContent}</textarea>
 			  	</fieldset>
-			</div>
-			 <div class="form-group" style="padding-bottom: 20px;">
-			      <label for="exampleTextarea" class="form-label mt-4">CONTENT</label>
-			      <textarea class="form-control" id="exampleTextarea" rows="10" name="content" readonly="readonly">${boardOne.boardContent}</textarea>
 		    </div>
 			
 			<!-- #### 수정 삭제 #### -->

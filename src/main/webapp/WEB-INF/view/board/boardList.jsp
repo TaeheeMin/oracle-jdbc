@@ -8,10 +8,15 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function() {
+				// 1) 검색
 				$('#rowPerPage').change(function() {
 					$('#listForm').submit();
 				});
+				$('#listBtn').click(function(){
+					$('#listForm').submit();
+				});
 				
+				// 2) 스크롤 top
 				$(window).scroll( function() {
 					if ( $( this ).scrollTop() > 200 ) {
 						$('.top').fadeIn();
@@ -19,11 +24,14 @@
 						$('.top').fadeOut();
 					}
 				});
-				
 				$('.top').click( function() {
 					$('html, body').animate( { scrollTop : 0 }, 400 );
 					return false;
-				} );
+				});
+				// 3) 글쓰기
+				$('#addBoard').click(function(){
+					location.href='${pageContext.request.contextPath}/AddBoard';
+				});
 			});
 		</script>
 	</head>
@@ -40,12 +48,12 @@
 			</div>
 			
 			<!-- #### 글쓰기 #### -->
-			<a href="${pageContext.request.contextPath}/AddBoard">글쓰기</a>
+			<button class="btn btn-secondary my-2 my-sm-0" type="button" id="addBoard">+ NEW</button>
 			
 			<!-- #### 검색 #### -->
 			<div style="float: right;">
 				<form id="listForm" method="get" action="${pageContext.request.contextPath}/BoardList">
-       				<select name="rowPerPage" id="rowPerPage" class="">
+       				<select name="rowPerPage" id="rowPerPage">
 						<c:if test="${rowPerPage == 10}">
 							<option value="10" selected="selected">10</option>
 							<option value="20">20</option>
@@ -64,14 +72,13 @@
 					</select>
 					
 					<select name="category" id="category">
-						<option value="board_title">제목</option>
-						<option value="board_content">내용</option>
-						<option value="member_id">작성자</option>
+						<option value="board_title">TITLE</option>
+						<option value="member_id">USER</option>
 					</select>
 					
-					<input type="search" placeholder="Search" name="word" id="search" value="${word}">
+					<input type="search" placeholder="Search" name="word" value="${word}">
 					
-       				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+       				<button class="btn btn-secondary my-2 my-sm-0" type="button" id="listBtn">Search</button>
 				</form>
 			</div>
 			
@@ -102,7 +109,7 @@
 					</c:forEach>
 			  	</tbody>
 			</table>
-			
+			<div>${count}</div>
 			<!-- #### 페이징 #### -->
 			<div class="pagination-center" style="height: 50px;width: 250px;">
 		  		<ul class="pagination" >
@@ -133,7 +140,7 @@
 			<a href="${pageContext.request.contextPath}/BoardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
 		</div>
 		
-	<!--  #### TOP 스크롤 버튼 #### -->
-	<button type="button" class="top moveTopBtn">^</button>
+		<!--  #### TOP 스크롤 버튼 #### -->
+		<button type="button" class="top moveTopBtn">^</button>
 	</body>
 </html>

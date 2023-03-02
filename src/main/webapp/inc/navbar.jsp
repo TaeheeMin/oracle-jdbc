@@ -8,6 +8,7 @@
 		<link href="${pageContext.request.contextPath}/resources/_variables.scss" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/resources/bootstrap.css" rel="stylesheet">
   		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	</head>
 	
 	<body>
@@ -25,7 +26,7 @@
 				          	</a>
 				        </li>
 				        <li class="nav-item">
-				          	<a class="nav-link" href="#">About</a>
+				          	<a class="nav-link" href="${pageContext.request.contextPath}/Home" id="about" >About</a>
 				        </li>
 				        <li class="nav-item">
 				          	<a class="nav-link" href="${pageContext.request.contextPath}/BoardList">Community</a>

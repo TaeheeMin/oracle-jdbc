@@ -12,14 +12,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function() {
-				$(window).scroll( function() {
-					if ( $( this ).scrollTop() > 200 ) {
-						$('#navbar').fadeIn();
-					} else {
-						$('#navbar').fadeOut();
-					}
-				});
-				
+				// 1) 스크롤 top
 				$(window).scroll( function() {
 					if ( $( this ).scrollTop() > 200 ) {
 						$('.top').fadeIn();
@@ -30,7 +23,13 @@
 				$('.top').click( function() {
 					$('html, body').animate( { scrollTop : 0 }, 400 );
 					return false;
-				} );
+				});
+				
+				// 2) about 이동
+				$('#about').click( function() {
+					$('html, body').animate( { scrollTop : 1500 }, 200 );
+					return false;
+				});
 			});
 		</script>
 	</head>
@@ -50,7 +49,7 @@
 				          	</a>
 				        </li>
 				        <li class="nav-item">
-				          	<a class="nav-link" href="#">About</a>
+				          	<a class="nav-link" href="${pageContext.request.contextPath}/Home" id="about">About</a>
 				        </li>
 				        <li class="nav-item">
 				          	<a class="nav-link" href="${pageContext.request.contextPath}/BoardList">Community</a>
@@ -81,9 +80,11 @@
 			<div class="head">
 				<h1>GOODEE</h1>
 				<h3><small class="text-muted">GOODEE board</small></h3>
-				<img src="${pageContext.request.contextPath}/img/home.png" style="width: 1200px;">
-				<a href="${pageContext.request.contextPath}/LoginController">LOGIN</a>
-				<a href="${pageContext.request.contextPath}/AddMember">SIGNIN</a>
+				<c:if test="${loginMember.memberId == null}">
+					<a href="${pageContext.request.contextPath}/LoginController">LOGIN &nbsp;</a>
+					<a href="${pageContext.request.contextPath}/AddMember">SIGNIN</a>
+				</c:if>
+				<img src="${pageContext.request.contextPath}/img/home4.PNG" style="height:1200px; width: 400px">
 			</div>
 		</div>
 		
@@ -91,7 +92,8 @@
 		<div class="container">
 			<div class="head">
 				<h1>About</h1>
-				<h3><small class="text-muted">게시판 설명 넣기 이 프로젝트 설명 넣어주기, 어떤 기술 썼는지 어떤 기능이 있는지 추가하면 좋을거같음</small></h3>
+				<h3><small class="text-muted">게시판 설명 넣기 이 프로젝트 설명 넣어주기 오라클이용한 게시판 구현</small></h3>
+				<img src="${pageContext.request.contextPath}/img/home4.PNG" style="height:1200px; width: 400px">
 			</div>
 			
 			<ul class="nav nav-tabs" role="tablist">
@@ -132,9 +134,8 @@
 			    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
 			  </div>
 			</div>
-			
-			
-			
 		</div>
+		<!--  #### TOP 스크롤 버튼 #### -->
+		<button type="button" class="top moveTopBtn">^</button>
 	</body>
 </html>

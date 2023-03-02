@@ -5,9 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import oracle.jdbc.proxy.annotation.Pre;
 import vo.Board;
 
 public class BoardDao {
+	// 0) count
+	public int selectBoardCount(Connection conn) throws Exception {
+		int row = 0;
+		String sql = "SELECT COUNT(*) FROM board";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			row = rs.getInt("COUNT(*)");
+		}
+		System.out.println("DaoRow : " + row);
+		return row;
+	}
+	
 	// 1) list
 	// 1-1) 전체 list
 	public ArrayList<Board> selectBoardListByPage(Connection conn, int beginRow, int endRow) throws Exception {

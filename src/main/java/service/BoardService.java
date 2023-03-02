@@ -10,7 +10,34 @@ import vo.Board;
 
 public class BoardService {
 	private BoardDao boardDao;
-	
+	// 0) count
+	public int getBoardCount() {
+		int row = 0;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			boardDao = new BoardDao();
+			row = boardDao.selectBoardCount(conn);
+			boardDao = new BoardDao();
+			//int lastPage = (int)Math.ceil((double)count / (double)rowPerPage);
+			conn.commit(); // DBUtil setAutoCommit false설정
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 	// 1) select
 	// 1-1) board list
 	public ArrayList<Board> getBoardListByPage(int currentPage, int rowPerPage) {
@@ -24,6 +51,8 @@ public class BoardService {
 			// System.out.println("beginRow : " + beginRow);
 			// System.out.println("endRow : " + endRow);
 			boardDao = new BoardDao();
+			int count = boardDao.selectBoardCount(conn); 
+			// int lastPage = (int)Math.ceil((double)count / (double)rowPerPage);
 			list = boardDao.selectBoardListByPage(conn, beginRow, endRow);
 			conn.commit(); // DBUtil setAutoCommit false설정
 		} catch (Exception e) {
